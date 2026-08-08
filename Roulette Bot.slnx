@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="BackEndCore/BackEndCore.csproj" />
+  <Project Path="MVVM Core/MVVM Core.csproj" />
+  <Project Path="Roulette Bot/Roulette Bot.csproj" />
+</Solution>

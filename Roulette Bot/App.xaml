@@ -1,0 +1,41 @@
+﻿<Application x:Class="Roulette_Bot.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Roulette_Bot"
+             xmlns:helpers="clr-namespace:Roulette_Bot.Helpers"
+             xmlns:viewModel="clr-namespace:MVVM_Core.ViewModels;assembly=MVVM_Core" 
+             xmlns:settingsview="clr-namespace:Roulette_Bot.View" 
+             xmlns:homeview="clr-namespace:Roulette_Bot.View">
+    
+    <Application.Resources>
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+
+                <ResourceDictionary Source="Styles/Colors.xaml"/>
+                <ResourceDictionary Source="Styles/SideMenuBtnStyle.xaml"/>
+                <ResourceDictionary Source="Styles/Icons.xaml"/>
+                <ResourceDictionary Source="Styles/CardStyle.xaml"/>
+                <ResourceDictionary Source="Styles/HeaderStyle.xaml"/>
+                <ResourceDictionary Source="Styles/StartBtnStyle.xaml"/>
+                <ResourceDictionary Source="Styles/ScrollBarStyle.xaml"/>
+                <ResourceDictionary Source="Styles/ButtonStyles.xaml" />
+
+            </ResourceDictionary.MergedDictionaries>
+
+            <!-- Converter used by the side menu radio button binding -->
+            <helpers:EnumToBoolConverter x:Key="EnumToBoolConverter"/>
+            <helpers:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+            <helpers:BooleanToVisibilityInverseConverter x:Key="BooleanToVisibilityInverseConverter"/>
+
+            <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
+                <homeview:HomeView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:SettingsViewModel}">
+                <settingsview:SettingsView/>
+            </DataTemplate>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

@@ -1,0 +1,69 @@
+# Visual Studio / .NET .gitignore
+
+## Build results
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Ll]og/
+[Ll]ogs/
+
+## Visual Studio files
+.vs/
+*.user
+*.userosscache
+*.suo
+*.userprefs
+*.sln.docstates
+
+## NuGet
+*.nuget.props
+*.nuget.targets
+packages/
+!packages/build/
+*.nupkg
+
+## Build artifacts
+*.dll
+*.exe
+*.pdb
+*.cache
+*.ilk
+*.meta
+*.obj
+*.tlog
+*.tmp
+*.tmp_proj
+*.vspscc
+*.vssscc
+
+## ReSharper / Rider
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+## Test results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+## Publish / deployment
+publish/
+*.pubxml
+*.publishproj
+*.azurePubxml
+*.Publish.xml
+
+## Rider / VS Code
+.idea/
+.vscode/
+
+## OS files
+Thumbs.db
+.DS_Store
+
+## Secrets / config (be careful with these!)
+*.pfx
+appsettings.Development.json
+secrets.json
