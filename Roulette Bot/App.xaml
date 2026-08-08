@@ -3,9 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Roulette_Bot"
              xmlns:helpers="clr-namespace:Roulette_Bot.Helpers"
-             xmlns:viewModel="clr-namespace:MVVM_Core.ViewModels;assembly=MVVM_Core" 
-             xmlns:settingsview="clr-namespace:Roulette_Bot.View" 
-             xmlns:homeview="clr-namespace:Roulette_Bot.View">
+             xmlns:viewModel="clr-namespace:MVVM_Core.ViewModels;assembly=MVVM_Core">
     
     <Application.Resources>
 
@@ -27,14 +25,6 @@
             <helpers:EnumToBoolConverter x:Key="EnumToBoolConverter"/>
             <helpers:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
             <helpers:BooleanToVisibilityInverseConverter x:Key="BooleanToVisibilityInverseConverter"/>
-
-            <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
-                <homeview:HomeView/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type viewModel:SettingsViewModel}">
-                <settingsview:SettingsView/>
-            </DataTemplate>
 
         </ResourceDictionary>
     </Application.Resources>

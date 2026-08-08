@@ -1,32 +1,37 @@
-﻿<Window x:Class="Roulette_Bot.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Roulette_Bot"
-        xmlns:viewmodels="clr-namespace:MVVM_Core.ViewModels;assembly=MVVM_Core"        
-        d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
-        mc:Ignorable="d"
-        Title="{x:Static local:App.FullTitle}"
-        Height="600" Width="900"
-        ResizeMode="CanResize"
-        Background="#111214" WindowStartupLocation="CenterScreen"
-        FontFamily="Segoe UI">
+﻿<Window
+    x:Class="Roulette_Bot.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Roulette_Bot"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:view="clr-namespace:Roulette_Bot.View"
+    xmlns:viewmodels="clr-namespace:MVVM_Core.ViewModels;assembly=MVVM_Core"
+    Title="{x:Static local:App.FullTitle}"
+    Width="900"
+    Height="600"
+    d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
+    Background="#111214"
+    FontFamily="Segoe UI"
+    ResizeMode="CanResize"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
 
     <Window.Resources>
         <Style TargetType="ToolTip">
-            <Setter Property="Background" Value="#35373C"/>
-            <Setter Property="Foreground" Value="#F2F3F5"/>
-            <Setter Property="Padding" Value="10,6"/>
-            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Background" Value="#35373C" />
+            <Setter Property="Foreground" Value="#F2F3F5" />
+            <Setter Property="Padding" Value="10,6" />
+            <Setter Property="BorderThickness" Value="0" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ToolTip">
-                        <Border Background="{TemplateBinding Background}" 
-                        CornerRadius="4" 
-                        BorderBrush="{TemplateBinding BorderBrush}" 
-                        BorderThickness="{TemplateBinding BorderThickness}">
-                            <ContentPresenter Margin="{TemplateBinding Padding}"/>
+                        <Border
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="4">
+                            <ContentPresenter Margin="{TemplateBinding Padding}" />
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
@@ -37,40 +42,46 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <!-- #region Side Menu -->
-        <Border x:Name="GridNav" Grid.Column="0" MaxWidth="60" Width="60" Background="{StaticResource SidebarBackground}">
+        <!--#region Side Menu-->
+        <Border
+            x:Name="GridNav"
+            Grid.Column="0"
+            Width="60"
+            MaxWidth="60"
+            Background="{StaticResource SidebarBackground}">
 
             <StackPanel Margin="0,30,0,5" VerticalAlignment="Top">
 
-                <RadioButton x:Name="NavHome" 
-                             IsChecked="{Binding MenuSelectedMode, 
-                                         Converter={StaticResource EnumToBoolConverter},
-                                         ConverterParameter={x:Static viewmodels:MenuBtnMode.Home},
-                                         Mode=TwoWay}"
-                             Command="{Binding ShowHomeViewCommand}"
-                             Style="{StaticResource SideMenuBtnStyle}"
-                             Tag="Dashboard"                             
-                             Content="{StaticResource HomeIcon}"/>
+                <RadioButton
+                    x:Name="NavHome"
+                    d:IsChecked="True"
+                    Command="{Binding ShowHomeViewCommand}"
+                    Content="{StaticResource HomeIcon}"
+                    IsChecked="{Binding MenuSelectedMode, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static viewmodels:MenuBtnMode.Home}, Mode=TwoWay}"
+                    Style="{StaticResource SideMenuBtnStyle}"
+                    Tag="Dashboard" />
 
-                <RadioButton x:Name="NavSettings"                             
-                             IsChecked="{Binding MenuSelectedMode, 
-                                        Converter={StaticResource EnumToBoolConverter},
-                                        ConverterParameter={x:Static viewmodels:MenuBtnMode.Settings},
-                                        Mode=TwoWay}"
-                             Command="{Binding ShowSettingsViewCommand}"
-                             Style="{StaticResource SideMenuBtnStyle}"
-                             Tag="Settings"                             
-                             Content="{StaticResource SettingsIcon}"/>
+                <RadioButton
+                    x:Name="NavSettings"
+                    Command="{Binding ShowSettingsViewCommand}"
+                    Content="{StaticResource SettingsIcon}"
+                    IsChecked="{Binding MenuSelectedMode, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static viewmodels:MenuBtnMode.Settings}, Mode=TwoWay}"
+                    Style="{StaticResource SideMenuBtnStyle}"
+                    Tag="Settings" />
 
             </StackPanel>
         </Border>
-        <!-- #endregion -->
+        <!--#endregion-->
 
-        <ContentControl Grid.Column="1" Margin="20" Content="{Binding CurrentView}"/>
+        <Grid Grid.Column="1" Margin="20">
+            <view:HomeView DataContext="{Binding HomeVM}" Visibility="{Binding IsChecked, ElementName=NavHome, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+            <view:SettingsView DataContext="{Binding SettingsVM}" Visibility="{Binding IsChecked, ElementName=NavSettings, Converter={StaticResource BooleanToVisibilityConverter}}" />
+        </Grid>
 
     </Grid>
 

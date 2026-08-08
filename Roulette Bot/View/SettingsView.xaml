@@ -1,60 +1,61 @@
-﻿<UserControl x:Class="Roulette_Bot.View.SettingsView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Roulette_Bot.View"
-             xmlns:helper="clr-namespace:Roulette_Bot.Helpers" 
-             xmlns:viewmodels="clr-namespace:MVVM_Core.ViewModels;assembly=MVVM_Core" 
-             d:DataContext="{d:DesignInstance Type=viewmodels:SettingsViewModel}"
-             mc:Ignorable="d" 
-             d:DesignHeight="4500" d:DesignWidth="800">
+﻿<UserControl
+    x:Class="Roulette_Bot.View.SettingsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:helper="clr-namespace:Roulette_Bot.Helpers"
+    xmlns:local="clr-namespace:Roulette_Bot.View"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:MVVM_Core.ViewModels;assembly=MVVM_Core"
+    d:DataContext="{d:DesignInstance Type=viewmodels:SettingsViewModel}"
+    d:DesignHeight="4500"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
 
     <UserControl.Resources>
-        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
-        
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+
         <Style TargetType="RadioButton">
-            <Setter Property="Foreground" Value="{StaticResource SecondaryText}"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Margin" Value="4, 5"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="FontFamily" Value="Arial"/>
-            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="Foreground" Value="{StaticResource SecondaryText}" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Margin" Value="4,5" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="FontFamily" Value="Arial" />
+            <Setter Property="FontWeight" Value="Normal" />
 
         </Style>
 
         <Style TargetType="TextBox">
-            <Setter Property="Height" Value="23.9"/>
-            <Setter Property="FontFamily" Value="Arial"/>
-            <Setter Property="FontWeight" Value="Normal"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Background" Value="#E7E7E7"/>
+            <Setter Property="Height" Value="23.9" />
+            <Setter Property="FontFamily" Value="Arial" />
+            <Setter Property="FontWeight" Value="Normal" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Background" Value="#E7E7E7" />
 
         </Style>
 
         <Style TargetType="PasswordBox">
-            <Setter Property="Height" Value="23.9"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Background" Value="#E7E7E7"/>
+            <Setter Property="Height" Value="23.9" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Background" Value="#E7E7E7" />
         </Style>
 
         <Style TargetType="Label">
-            <Setter Property="Foreground" Value="{StaticResource SecondaryText}"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="FontFamily" Value="Arial"/>
-            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="Foreground" Value="{StaticResource SecondaryText}" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontFamily" Value="Arial" />
+            <Setter Property="FontWeight" Value="Normal" />
         </Style>
 
     </UserControl.Resources>
 
 
     <Grid>
-        <ScrollViewer VerticalScrollBarVisibility="Auto" 
-                      HorizontalScrollBarVisibility="Disabled">
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
 
             <ScrollViewer.Resources>
-                <!-- === DARK SCROLLBAR WITH VISIBLE ARROWS ON BOTH ENDS === -->
+                <!--  === DARK SCROLLBAR WITH VISIBLE ARROWS ON BOTH ENDS ===  -->
                 <SolidColorBrush x:Key="DarkTrack" Color="#1E1E1E" />
                 <SolidColorBrush x:Key="DarkThumb" Color="#555555" />
                 <SolidColorBrush x:Key="DarkThumbHover" Color="#777777" />
@@ -65,7 +66,7 @@
                 <SolidColorBrush x:Key="DarkButtonPressed" Color="#505050" />
                 <SolidColorBrush x:Key="ArrowColor" Color="#D0D0D0" />
 
-                <!-- Arrow Button Style – arrows stay visible even when disabled -->
+                <!--  Arrow Button Style – arrows stay visible even when disabled  -->
                 <Style x:Key="ScrollArrowButton" TargetType="RepeatButton">
                     <Setter Property="Background" Value="{StaticResource DarkButton}" />
                     <Setter Property="Padding" Value="2" />
@@ -73,21 +74,20 @@
                         <Setter.Value>
                             <ControlTemplate TargetType="RepeatButton">
                                 <Border Background="{TemplateBinding Background}">
-                                    <ContentPresenter HorizontalAlignment="Center"
-                                              VerticalAlignment="Center" />
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                                 </Border>
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
                     <Style.Triggers>
-                        <!-- Hover / Press -->
+                        <!--  Hover / Press  -->
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Background" Value="{StaticResource DarkButtonHover}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter Property="Background" Value="{StaticResource DarkButtonPressed}" />
                         </Trigger>
-                        <!-- Keep arrows visible when at end point (disabled) -->
+                        <!--  Keep arrows visible when at end point (disabled)  -->
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" Value="0.75" />
                         </Trigger>
@@ -96,7 +96,7 @@
 
                 <Style TargetType="{x:Type ScrollBar}">
                     <Setter Property="Width" Value="16" />
-                    <!-- wider = cleaner arrows -->
+                    <!--  wider = cleaner arrows  -->
                     <Setter Property="Background" Value="{StaticResource DarkTrack}" />
                     <Setter Property="Template">
                         <Setter.Value>
@@ -104,40 +104,43 @@
                                 <Grid Background="{TemplateBinding Background}">
                                     <Track x:Name="PART_Track" IsDirectionReversed="True">
 
-                                        <!-- ↑ Top / Left Arrow (always visible) -->
+                                        <!--  ↑ Top / Left Arrow (always visible)  -->
                                         <Track.DecreaseRepeatButton>
-                                            <RepeatButton Style="{StaticResource ScrollArrowButton}" 
-                                                  Command="ScrollBar.LineUpCommand">
-                                                <Path Data="M 0,9 L 11,9 L 5.5,2 Z" 
-                                              Fill="{StaticResource ArrowColor}"
-                                              Width="11" Height="10"
-                                              HorizontalAlignment="Center"
-                                              VerticalAlignment="Center" />
+                                            <RepeatButton Command="ScrollBar.LineUpCommand" Style="{StaticResource ScrollArrowButton}">
+                                                <Path
+                                                    Width="11"
+                                                    Height="10"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    Data="M 0,9 L 11,9 L 5.5,2 Z"
+                                                    Fill="{StaticResource ArrowColor}" />
                                             </RepeatButton>
                                         </Track.DecreaseRepeatButton>
 
-                                        <!-- Thumb -->
+                                        <!--  Thumb  -->
                                         <Track.Thumb>
                                             <Thumb x:Name="Thumb" Background="{StaticResource DarkThumb}">
                                                 <Thumb.Template>
                                                     <ControlTemplate TargetType="{x:Type Thumb}">
-                                                        <Border Background="{TemplateBinding Background}" 
-                                                        CornerRadius="5" 
-                                                        Margin="3,1" />
+                                                        <Border
+                                                            Margin="3,1"
+                                                            Background="{TemplateBinding Background}"
+                                                            CornerRadius="5" />
                                                     </ControlTemplate>
                                                 </Thumb.Template>
                                             </Thumb>
                                         </Track.Thumb>
 
-                                        <!-- ↓ Bottom / Right Arrow (always visible) -->
+                                        <!--  ↓ Bottom / Right Arrow (always visible)  -->
                                         <Track.IncreaseRepeatButton>
-                                            <RepeatButton Style="{StaticResource ScrollArrowButton}" 
-                                                  Command="ScrollBar.LineDownCommand">
-                                                <Path Data="M 0,2 L 11,2 L 5.5,9 Z" 
-                                              Fill="{StaticResource ArrowColor}"
-                                              Width="11" Height="10"
-                                              HorizontalAlignment="Center"
-                                              VerticalAlignment="Center" />
+                                            <RepeatButton Command="ScrollBar.LineDownCommand" Style="{StaticResource ScrollArrowButton}">
+                                                <Path
+                                                    Width="11"
+                                                    Height="10"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    Data="M 0,2 L 11,2 L 5.5,9 Z"
+                                                    Fill="{StaticResource ArrowColor}" />
                                             </RepeatButton>
                                         </Track.IncreaseRepeatButton>
                                     </Track>
@@ -158,180 +161,187 @@
             </ScrollViewer.Resources>
 
 
-            <Grid  IsEnabled="{Binding IsUiEnabled}">
+            <Grid IsEnabled="{Binding IsUiEnabled}">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" Text="Settings" FontSize="24" FontWeight="Bold" Margin="0,0,0,15" Foreground="{StaticResource PrimaryText}" />
+                <TextBlock
+                    Grid.Row="0"
+                    Margin="0,0,0,15"
+                    FontSize="24"
+                    FontWeight="Bold"
+                    Foreground="{StaticResource PrimaryText}"
+                    Text="Settings" />
 
                 <StackPanel Grid.Row="1" Margin="0,0,20,0">
 
-                    <!-- #region Cafe Casino Account -->
+                    <!--#region Cafe Casino Account-->
 
                     <Border Style="{StaticResource CardStyle}">
                         <StackPanel>
-                            <TextBlock Text="Cafe Casino Account:" Style="{StaticResource HeaderStyle}"/>
+                            <TextBlock Style="{StaticResource HeaderStyle}" Text="Cafe Casino Account:" />
 
-                            <!-- Email -->
-                            <TextBlock Text="Email" 
-                                       Margin="4,12,0,5" 
-                                       Foreground="{StaticResource SecondaryText}" 
-                                       FontSize="12"/>
+                            <!--  Email  -->
+                            <TextBlock
+                                Margin="4,12,0,5"
+                                FontSize="12"
+                                Foreground="{StaticResource SecondaryText}"
+                                Text="Email" />
 
-                            <TextBox Text="{Binding CurrentSettings.Email, 
-                                            UpdateSourceTrigger=PropertyChanged, 
-                                            Mode=TwoWay}"
-                                     
-                                     Margin="4,0,0,15"/>
+                            <TextBox Margin="4,0,0,15" Text="{Binding CurrentSettings.Email, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
 
-                            <!-- Password -->
-                            <TextBlock Text="Password" 
-                                       Margin="4,0,0,5" 
-                                       Foreground="{StaticResource SecondaryText}"
-                                       FontSize="12"/>
-                            <PasswordBox helper:PasswordBoxHelper.BindPassword="True"
-                                         helper:PasswordBoxHelper.BoundPassword="{Binding CurrentSettings.Password, Mode=TwoWay}"
-                                         Margin="4,0,0,20"/>        
+                            <!--  Password  -->
+                            <TextBlock
+                                Margin="4,0,0,5"
+                                FontSize="12"
+                                Foreground="{StaticResource SecondaryText}"
+                                Text="Password" />
+                            <PasswordBox
+                                Margin="4,0,0,20"
+                                helper:PasswordBoxHelper.BindPassword="True"
+                                helper:PasswordBoxHelper.BoundPassword="{Binding CurrentSettings.Password, Mode=TwoWay}" />
 
 
-                            <!-- Buttons (Load button removed) -->
-                            <StackPanel Orientation="Horizontal" 
-                                        Margin="4,0,0,0"
-                                        HorizontalAlignment="Left"
-                                        Visibility="{Binding IsDirty, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <!--  Buttons (Load button removed)  -->
+                            <StackPanel
+                                Margin="4,0,0,0"
+                                HorizontalAlignment="Left"
+                                Orientation="Horizontal"
+                                Visibility="{Binding IsDirty, Converter={StaticResource BooleanToVisibilityConverter}}">
 
-                                <Button Content="Cancel" 
-                                        Command="{Binding CancelCommand}"
-                                        Style="{StaticResource SecondaryButtonStyle}"
-                                        Margin="0,0,10,0"/>
+                                <Button
+                                    Margin="0,0,10,0"
+                                    Command="{Binding CancelCommand}"
+                                    Content="Cancel"
+                                    Style="{StaticResource SecondaryButtonStyle}" />
 
-                                <Button Content="Save" 
-                                        Command="{Binding SaveCommand}"
-                                        Style="{StaticResource PrimaryButtonStyle}"
-                                        />
+                                <Button
+                                    Command="{Binding SaveCommand}"
+                                    Content="Save"
+                                    Style="{StaticResource PrimaryButtonStyle}" />
                             </StackPanel>
                         </StackPanel>
                     </Border>
-                    <!-- #endregion -->
+                    <!--#endregion-->
 
-                    <!-- #region Play Mode -->
+                    <!--#region Play Mode-->
 
                     <Border Style="{StaticResource CardStyle}">
                         <StackPanel>
-                            <TextBlock Text="Play Mode:" Style="{StaticResource HeaderStyle}"/>
+                            <TextBlock Style="{StaticResource HeaderStyle}" Text="Play Mode:" />
                             <StackPanel>
-                                <RadioButton Name="RealPlay"  
-                                             Content="Real Play"
-                                             Command="{Binding SelectRealPlayCommand}"
-                                             IsChecked="{Binding PlayModeSelected, 
-                                                         Converter={StaticResource EnumToBoolConverter},
-                                                         ConverterParameter={x:Static viewmodels:PlayMode.RealPlay},
-                                                         Mode=TwoWay}"/>
-                                
-                                <RadioButton Name="PracticePlay" 
-                                             Content="Practice Play" 
-                                             Command="{Binding SelectPracticePlayCommand}"
-                                             IsChecked="{Binding PlayModeSelected, 
-                                                         Converter={StaticResource EnumToBoolConverter},
-                                                         ConverterParameter={x:Static viewmodels:PlayMode.PracticePlay},
-                                                         Mode=TwoWay}"/>
+                                <RadioButton
+                                    Name="RealPlay"
+                                    Command="{Binding SelectRealPlayCommand}"
+                                    Content="Real Play"
+                                    IsChecked="{Binding PlayModeSelected, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static viewmodels:PlayMode.RealPlay}, Mode=TwoWay}" />
+
+                                <RadioButton
+                                    Name="PracticePlay"
+                                    Command="{Binding SelectPracticePlayCommand}"
+                                    Content="Practice Play"
+                                    IsChecked="{Binding PlayModeSelected, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static viewmodels:PlayMode.PracticePlay}, Mode=TwoWay}" />
                             </StackPanel>
                         </StackPanel>
                     </Border>
-                    <!-- #endregion -->
+                    <!--#endregion-->
 
-                    <!-- #region Stop Operating After -->
+                    <!--#region Stop Operating After-->
 
                     <Border Style="{StaticResource CardStyle}">
                         <StackPanel>
-                            <TextBlock Text="Stop Operating After:" Style="{StaticResource HeaderStyle}"/>
+                            <TextBlock Style="{StaticResource HeaderStyle}" Text="Stop Operating After:" />
 
                             <Grid>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" ></RowDefinition>
-                                    <RowDefinition Height="Auto" ></RowDefinition>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
 
-                                <Border Grid.Row="0" Margin="2" Padding="3" BorderBrush="#FF080101">
+                                <Border
+                                    Grid.Row="0"
+                                    Margin="2"
+                                    Padding="3"
+                                    BorderBrush="#FF080101">
                                     <StackPanel>
-                                        <RadioButton Name="DurationOfTime" 
-                                                     Content="Duration Of Time"
-                                                     Command="{Binding SelectDurationOfTimeCommand}"
-                                                     IsChecked="{Binding StopOperatingAfterSelectedMode, 
-                                                                Converter={StaticResource EnumToBoolConverter},
-                                                                ConverterParameter={x:Static viewmodels:StopOperatingAfterMode.DurationOfTime},
-                                                                Mode=TwoWay}"/>
-                                                                  
-                                        
-                                        <RadioButton Name="DollarAmountWon" 
-                                                     Content="$ Amount Won (Profit marker)" 
-                                                     Command="{Binding SelectDollarAmountWonCommand}"
-                                                     IsChecked="{Binding StopOperatingAfterSelectedMode, 
-                                                                Converter={StaticResource EnumToBoolConverter},
-                                                                ConverterParameter={x:Static viewmodels:StopOperatingAfterMode.DollarAmountWon},
-                                                                Mode=TwoWay}"
-                                                     d:IsChecked="True"/>
+                                        <RadioButton
+                                            Name="DurationOfTime"
+                                            Command="{Binding SelectDurationOfTimeCommand}"
+                                            Content="Duration Of Time"
+                                            IsChecked="{Binding StopOperatingAfterSelectedMode, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static viewmodels:StopOperatingAfterMode.DurationOfTime}, Mode=TwoWay}" />
+
+
+                                        <RadioButton
+                                            Name="DollarAmountWon"
+                                            d:IsChecked="True"
+                                            Command="{Binding SelectDollarAmountWonCommand}"
+                                            Content="$ Amount Won (Profit marker)"
+                                            IsChecked="{Binding StopOperatingAfterSelectedMode, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static viewmodels:StopOperatingAfterMode.DollarAmountWon}, Mode=TwoWay}" />
                                     </StackPanel>
                                 </Border>
 
 
                                 <Grid Grid.Row="1">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
 
 
-                                    <StackPanel Name="DurationPanel" 
-                                                Grid.Column="0" 
-                                                Orientation="Horizontal">
+                                    <StackPanel
+                                        Name="DurationPanel"
+                                        Grid.Column="0"
+                                        Orientation="Horizontal">
                                         <StackPanel.Style>
                                             <Style TargetType="StackPanel">
-                                                <!-- Default state is hidden -->
+                                                <!--  Default state is hidden  -->
                                                 <Setter Property="Visibility" Value="Collapsed" />
                                                 <Style.Triggers>
-                                                    <!-- When DollarAmountWon is checked, make it visible -->
+                                                    <!--  When DollarAmountWon is checked, make it visible  -->
                                                     <DataTrigger Binding="{Binding IsChecked, ElementName=DurationOfTime}" Value="True">
-                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                        <Setter Property="Visibility" Value="Visible" />
                                                     </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>
                                         </StackPanel.Style>
 
-                                        <Label Margin="23,0,0,0" >After</Label>
-                                        <TextBox Name="Duration"
-                                                 Width="52"
-                                                 Margin="7,0,0,0"
-                                                 TextAlignment="Center"
-                                                 MaxLength="4"                                      
-                                                 Text="{Binding Duration, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                 PreviewTextInput="Duration_PreviewTextInput"
-                                                 DataObject.Pasting="Duration_Pasting" />       
+                                        <Label Margin="23,0,0,0">After</Label>
+                                        <TextBox
+                                            Name="Duration"
+                                            Width="52"
+                                            Margin="7,0,0,0"
+                                            DataObject.Pasting="Duration_Pasting"
+                                            MaxLength="4"
+                                            PreviewTextInput="Duration_PreviewTextInput"
+                                            Text="{Binding Duration, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            TextAlignment="Center" />
                                     </StackPanel>
 
-                                    <ComboBox Name="TimeSet1"
-                                              Grid.Column="1"
-                                              Margin="30,3,3,3"
-                                              FontFamily="Arial"
-                                              FontSize="14"
-                                              FontWeight="Normal"
-                                              Visibility="{Binding IsDurationOfTime, Converter={StaticResource BooleanToVisibilityConverter}}"          
-                                              ItemsSource="{Binding TimeUnits}"
-                                              SelectedItem="{Binding SelectedDurationMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <ComboBox
+                                        Name="TimeSet1"
+                                        Grid.Column="1"
+                                        Margin="30,3,3,3"
+                                        FontFamily="Arial"
+                                        FontSize="14"
+                                        FontWeight="Normal"
+                                        ItemsSource="{Binding TimeUnits}"
+                                        SelectedItem="{Binding SelectedDurationMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        Visibility="{Binding IsDurationOfTime, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
 
-                                    <StackPanel Name="DollarWonPanel" 
-                                                Grid.Column="0"
-                                                Orientation="Horizontal">
-                                        
+                                    <StackPanel
+                                        Name="DollarWonPanel"
+                                        Grid.Column="0"
+                                        Orientation="Horizontal">
+
                                         <StackPanel.Style>
                                             <Style TargetType="StackPanel">
-                                                <!-- Default state is hidden -->
+                                                <!--  Default state is hidden  -->
                                                 <Setter Property="Visibility" Value="Collapsed" />
                                                 <Style.Triggers>
-                                                    <!-- When DollarAmountWon is checked, make it visible -->
+                                                    <!--  When DollarAmountWon is checked, make it visible  -->
                                                     <DataTrigger Binding="{Binding IsChecked, ElementName=DollarAmountWon}" Value="True">
                                                         <Setter Property="Visibility" Value="Visible" />
                                                     </DataTrigger>
@@ -340,16 +350,17 @@
                                         </StackPanel.Style>
 
 
-                                        <Label Margin="23,0,0,0" >$ Amount</Label>
+                                        <Label Margin="23,0,0,0">$ Amount</Label>
 
-                                        <TextBox Name="Dollar"
-                                                 Width="52"
-                                                 Margin="7,0,0,0"
-                                                 TextAlignment="Center"
-                                                 MaxLength="10"
-                                                 Text="{Binding Dollar, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                 PreviewTextInput="Dollar_PreviewTextInput"
-                                                 DataObject.Pasting="Dollar_Pasting" />
+                                        <TextBox
+                                            Name="Dollar"
+                                            Width="52"
+                                            Margin="7,0,0,0"
+                                            DataObject.Pasting="Dollar_Pasting"
+                                            MaxLength="10"
+                                            PreviewTextInput="Dollar_PreviewTextInput"
+                                            Text="{Binding Dollar, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            TextAlignment="Center" />
 
                                     </StackPanel>
 
@@ -357,57 +368,58 @@
                             </Grid>
                         </StackPanel>
                     </Border>
-                    <!-- #endregion -->
+                    <!--#endregion-->
 
-                    <!-- #region Then Start Operating Again After -->
+                    <!--#region Then Start Operating Again After-->
 
                     <Border Style="{StaticResource CardStyle}">
                         <StackPanel>
-                            <TextBlock Text="Then Start Operating Again After:" Style="{StaticResource HeaderStyle}"/>
+                            <TextBlock Style="{StaticResource HeaderStyle}" Text="Then Start Operating Again After:" />
 
                             <Grid>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" ></RowDefinition>
-                                    <RowDefinition Height="Auto" ></RowDefinition>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
 
-                                <Border Grid.Row="0" Margin="2" Padding="3" BorderBrush="#FF080101">
+                                <Border
+                                    Grid.Row="0"
+                                    Margin="2"
+                                    Padding="3"
+                                    BorderBrush="#FF080101">
                                     <StackPanel>
-                                        <RadioButton Name="FixedInterval" 
-                                                     Content="Fixed Intervals"
-                                                     Command="{Binding SelectFixedIntervalCommand}"
-                                                     IsChecked="{Binding ThenStartOperatingAgainAfterSelectedMode, 
-                                                                  Converter={StaticResource EnumToBoolConverter},
-                                                                  ConverterParameter={x:Static viewmodels:ThenStartOperatingAgainAfterMode.FixedInterval},
-                                                                  Mode=TwoWay}"/>
-                                        
-                                        <RadioButton Name="RandomInterval" 
-                                                     Content="Random Intervals"
-                                                     Command="{Binding SelectRandomIntervalCommand}"
-                                                     IsChecked="{Binding ThenStartOperatingAgainAfterSelectedMode, 
-                                                                 Converter={StaticResource EnumToBoolConverter},
-                                                                 ConverterParameter={x:Static viewmodels:ThenStartOperatingAgainAfterMode.RandomInterval},
-                                                                 Mode=TwoWay}"
-                                                     d:IsChecked="True"/>
+                                        <RadioButton
+                                            Name="FixedInterval"
+                                            Command="{Binding SelectFixedIntervalCommand}"
+                                            Content="Fixed Intervals"
+                                            IsChecked="{Binding ThenStartOperatingAgainAfterSelectedMode, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static viewmodels:ThenStartOperatingAgainAfterMode.FixedInterval}, Mode=TwoWay}" />
+
+                                        <RadioButton
+                                            Name="RandomInterval"
+                                            d:IsChecked="True"
+                                            Command="{Binding SelectRandomIntervalCommand}"
+                                            Content="Random Intervals"
+                                            IsChecked="{Binding ThenStartOperatingAgainAfterSelectedMode, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static viewmodels:ThenStartOperatingAgainAfterMode.RandomInterval}, Mode=TwoWay}" />
                                     </StackPanel>
                                 </Border>
 
                                 <Grid Grid.Row="1">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
 
-                                    <StackPanel Name="RandomPanel" 
-                                                Orientation="Horizontal" 
-                                                Grid.Column="0">
-                                        
+                                    <StackPanel
+                                        Name="RandomPanel"
+                                        Grid.Column="0"
+                                        Orientation="Horizontal">
+
                                         <StackPanel.Style>
                                             <Style TargetType="StackPanel">
-                                                <!-- Default state is hidden -->
-                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                                <!--  Default state is hidden  -->
+                                                <Setter Property="Visibility" Value="Collapsed" />
                                                 <Style.Triggers>
-                                                    <!-- When RandomInterval is checked, make it visible -->
+                                                    <!--  When RandomInterval is checked, make it visible  -->
                                                     <DataTrigger Binding="{Binding IsChecked, ElementName=RandomInterval}" Value="True">
                                                         <Setter Property="Visibility" Value="Visible" />
                                                     </DataTrigger>
@@ -415,39 +427,42 @@
                                             </Style>
                                         </StackPanel.Style>
 
-                                        <Label  Margin="23,0,0,0" >Between</Label>
-                                        
-                                        <TextBox Name="Btwn1"
-                                                 Width="52"
-                                                 Margin="4,0,4,0"
-                                                 TextAlignment="Center"
-                                                 MaxLength="4"
-                                                 Text="{Binding Btwn1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                 PreviewTextInput="Btwn1_PreviewTextInput"
-                                                 DataObject.Pasting="Btwn1_Pasting" />
+                                        <Label Margin="23,0,0,0">Between</Label>
+
+                                        <TextBox
+                                            Name="Btwn1"
+                                            Width="52"
+                                            Margin="4,0,4,0"
+                                            DataObject.Pasting="Btwn1_Pasting"
+                                            MaxLength="4"
+                                            PreviewTextInput="Btwn1_PreviewTextInput"
+                                            Text="{Binding Btwn1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            TextAlignment="Center" />
 
 
                                         <Label>and</Label>
-                                        <TextBox Name="Btwn2"
-                                                 Width="52"
-                                                 Margin="7,0,0,0"
-                                                 TextAlignment="Center"
-                                                 MaxLength="4"
-                                                 Text="{Binding Btwn2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                 PreviewTextInput="Btwn2_PreviewTextInput"
-                                                 DataObject.Pasting="Btwn2_Pasting" />  
+                                        <TextBox
+                                            Name="Btwn2"
+                                            Width="52"
+                                            Margin="7,0,0,0"
+                                            DataObject.Pasting="Btwn2_Pasting"
+                                            MaxLength="4"
+                                            PreviewTextInput="Btwn2_PreviewTextInput"
+                                            Text="{Binding Btwn2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            TextAlignment="Center" />
 
                                     </StackPanel>
 
-                                    <StackPanel Name="FixedPanel"
-                                                Grid.Column="0" 
-                                                Orientation="Horizontal">
+                                    <StackPanel
+                                        Name="FixedPanel"
+                                        Grid.Column="0"
+                                        Orientation="Horizontal">
                                         <StackPanel.Style>
                                             <Style TargetType="StackPanel">
-                                                <!-- Default state is hidden -->
+                                                <!--  Default state is hidden  -->
                                                 <Setter Property="Visibility" Value="Collapsed" />
                                                 <Style.Triggers>
-                                                    <!-- When FixedInterval is checked, make it visible -->
+                                                    <!--  When FixedInterval is checked, make it visible  -->
                                                     <DataTrigger Binding="{Binding IsChecked, ElementName=FixedInterval}" Value="True">
                                                         <Setter Property="Visibility" Value="Visible" />
                                                     </DataTrigger>
@@ -456,57 +471,55 @@
                                         </StackPanel.Style>
 
 
-                                        <Label Margin="23,0,0,0" >After every</Label>
-                                        <TextBox Name="FixedEvery"
-                                                 Width="52"
-                                                 Margin="7,0,0,0"
-                                                 TextAlignment="Center"
-                                                 MaxLength="4"
-                                                 Text="{Binding FixedEvery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                 PreviewTextInput="FixedEvery_PreviewTextInput"
-                                                 DataObject.Pasting="FixedEvery_Pasting" /> 
+                                        <Label Margin="23,0,0,0">After every</Label>
+                                        <TextBox
+                                            Name="FixedEvery"
+                                            Width="52"
+                                            Margin="7,0,0,0"
+                                            DataObject.Pasting="FixedEvery_Pasting"
+                                            MaxLength="4"
+                                            PreviewTextInput="FixedEvery_PreviewTextInput"
+                                            Text="{Binding FixedEvery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            TextAlignment="Center" />
                                     </StackPanel>
 
-                                    <ComboBox Name="TimeSet2" 
-                                              Grid.Column="1" 
-                                              Margin="30,3,3,3" 
-                                              FontFamily="Arial"
-                                              FontSize="14"
-                                              FontWeight="Normal"
-                                              HorizontalAlignment="Left"
-                                              ItemsSource="{Binding TimeUnits}"
-                                              SelectedItem="{Binding SelectedTimeSet2Mode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <ComboBox
+                                        Name="TimeSet2"
+                                        Grid.Column="1"
+                                        Margin="30,3,3,3"
+                                        HorizontalAlignment="Left"
+                                        FontFamily="Arial"
+                                        FontSize="14"
+                                        FontWeight="Normal"
+                                        ItemsSource="{Binding TimeUnits}"
+                                        SelectedItem="{Binding SelectedTimeSet2Mode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                                 </Grid>
                             </Grid>
 
                         </StackPanel>
                     </Border>
-                    <!-- #endregion -->
+                    <!--#endregion-->
 
                     <!--#region Bet On-->
                     <Border Style="{StaticResource CardStyle}">
                         <StackPanel>
-                            <TextBlock Text="Bet On:" Style="{StaticResource HeaderStyle}"/>
+                            <TextBlock Style="{StaticResource HeaderStyle}" Text="Bet On:" />
 
                             <Border Margin="2" Padding="3">
                                 <StackPanel>
-                                    <RadioButton x:Name="Feature_1_Option_A_RadioButton"
-                                                 Content="1-18,  Even,  Red,  Black,  Odd,  19-36"
-                                                 Command="{Binding Set_BetOn_Option_1Command}"
-                                                 IsChecked="{Binding BetOnMode, 
-                                                              Converter={StaticResource EnumToBoolConverter},
-                                                              ConverterParameter={x:Static viewmodels:BetOn.Option_1},
-                                                              Mode=TwoWay}"
-                                                 d:IsChecked="True"/>
+                                    <RadioButton
+                                        x:Name="Feature_1_Option_A_RadioButton"
+                                        Command="{Binding Set_BetOn_Option_1Command}"
+                                        Content="1-18,  Even,  Red,  Black,  Odd,  19-36"
+                                        IsChecked="{Binding BetOnMode, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static viewmodels:BetOn.Option_1}, Mode=TwoWay}" />
 
-                                    <RadioButton x:Name="Feature_1_Option_B_RadioButton"
-                                                 Content="1st 12,  2nd 12,  3rd 12,  top 2:1,  mid 2:1,  bottom 2:1"
-                                                 Command="{Binding Set_BetOn_Option_2Command}"
-                                                 IsChecked="{Binding BetOnMode, 
-                                                            Converter={StaticResource EnumToBoolConverter},
-                                                            ConverterParameter={x:Static viewmodels:BetOn.Option_2},
-                                                            Mode=TwoWay}"/>
+                                    <RadioButton
+                                        x:Name="Feature_1_Option_B_RadioButton"
+                                        d:IsChecked="True"
+                                        Command="{Binding Set_BetOn_Option_2Command}"
+                                        Content="1st 12,  2nd 12,  3rd 12,  top 2:1,  mid 2:1,  bottom 2:1"
+                                        IsChecked="{Binding BetOnMode, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static viewmodels:BetOn.Option_2}, Mode=TwoWay}" />
 
                                 </StackPanel>
                             </Border>
@@ -515,155 +528,134 @@
                     </Border>
                     <!--#endregion-->
 
-                    <!--#region $ Bet Mark Amount To Reset To $1   -->
+                    <!--#region $ Bet Mark Amount To Reset To $1-->
                     <Border Style="{StaticResource CardStyle}">
                         <StackPanel>
-                            <TextBlock Text="$ Bet Mark Amount To Reset To $1:" Style="{StaticResource HeaderStyle}"/>
+                            <TextBlock Style="{StaticResource HeaderStyle}" Text="$ Bet Mark Amount To Reset To $1:" />
 
                             <StackPanel Orientation="Horizontal">
 
-                                <Label  Margin="23,0,0,0" >$ Amount</Label>
+                                <Label Margin="23,0,0,0">$ Amount</Label>
 
-                                <TextBox Name="ResetMarkAmount"
-                                         Width="52"
-                                         Margin="4,0,4,0"
-                                         TextAlignment="Center"
-                                         MaxLength="5"
-                                         Text="{Binding ResetMarkAmount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                         PreviewTextInput="ResetMarkAmount_PreviewTextInput"
-                                         DataObject.Pasting="ResetMarkAmount_Pasting" 
-                                         d:Text="486"/>
+                                <TextBox
+                                    Name="ResetMarkAmount"
+                                    Width="52"
+                                    Margin="4,0,4,0"
+                                    d:Text="486"
+                                    DataObject.Pasting="ResetMarkAmount_Pasting"
+                                    MaxLength="5"
+                                    PreviewTextInput="ResetMarkAmount_PreviewTextInput"
+                                    Text="{Binding ResetMarkAmount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                    TextAlignment="Center" />
 
                             </StackPanel>
                         </StackPanel>
                     </Border>
                     <!--#endregion-->
 
-                    <!-- #region Implement Random Bet Every Time -->
-                    <Border Style="{StaticResource CardStyle}"
-                            Visibility="{Binding IsChecked, ElementName=Feature_1_Option_A_RadioButton, 
-                                        Converter={StaticResource BoolToVis}}">
-                        
+                    <!--#region Implement Random Bet Every Time-->
+                    <Border Style="{StaticResource CardStyle}" Visibility="{Binding IsChecked, ElementName=Feature_1_Option_A_RadioButton, Converter={StaticResource BoolToVis}}">
+
                         <StackPanel>
-                            <TextBlock Text="Implement Random Bet Every Time:" Style="{StaticResource HeaderStyle}"/>
+                            <TextBlock Style="{StaticResource HeaderStyle}" Text="Implement Random Bet Every Time:" />
 
                             <Border Margin="2" Padding="3">
 
                                 <StackPanel>
 
-                                    <RadioButton Content="Yes"
-                                                 Command="{Binding SetEveryTimeRandomBetCommand}"
-                                                 IsChecked="{Binding RandomBetMode, 
-                                                              Converter={StaticResource EnumToBoolConverter},
-                                                              ConverterParameter={x:Static viewmodels:RandomBetType.EveryTime},
-                                                              Mode=TwoWay}"
-                                                 d:IsChecked="False"/>
+                                    <RadioButton
+                                        d:IsChecked="False"
+                                        Command="{Binding SetEveryTimeRandomBetCommand}"
+                                        Content="Yes"
+                                        IsChecked="{Binding RandomBetMode, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static viewmodels:RandomBetType.EveryTime}, Mode=TwoWay}" />
 
-                                    <RadioButton Content="No"
-                                                 Command="{Binding SetDuringWinsRandomBetCommand}"
-                                                 IsChecked="{Binding RandomBetMode, 
-                                                              Converter={StaticResource EnumToBoolConverter},
-                                                              ConverterParameter={x:Static viewmodels:RandomBetType.During_Wins},
-                                                              Mode=TwoWay}"
-                                                 d:IsChecked="True"/>
+                                    <RadioButton
+                                        d:IsChecked="True"
+                                        Command="{Binding SetDuringWinsRandomBetCommand}"
+                                        Content="No"
+                                        IsChecked="{Binding RandomBetMode, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static viewmodels:RandomBetType.During_Wins}, Mode=TwoWay}" />
 
                                 </StackPanel>
                             </Border>
                         </StackPanel>
                     </Border>
-                    <!-- #endregion -->
+                    <!--#endregion-->
 
 
-
-                    <StackPanel Visibility="{Binding IsChecked, ElementName=Feature_1_Option_B_RadioButton, 
-                                            Converter={StaticResource BoolToVis}}">
+                    <StackPanel Visibility="{Binding IsChecked, ElementName=Feature_1_Option_B_RadioButton, Converter={StaticResource BoolToVis}}">
 
                         <!--#region Bet On 12 Sets-->
                         <Border Style="{StaticResource CardStyle}">
                             <StackPanel>
-                                <TextBlock Text="If 'Bet On' Option (1st 12,  2nd 12,  3rd 12,  top 2:1,  mid 2:1,  bottom 2:1) is selected:" Style="{StaticResource HeaderStyle}"/>
+                                <TextBlock Style="{StaticResource HeaderStyle}" Text="If 'Bet On' Option (1st 12,  2nd 12,  3rd 12,  top 2:1,  mid 2:1,  bottom 2:1) is selected:" />
 
 
                                 <Border Margin="2" Padding="3">
                                     <StackPanel>
-                                        <RadioButton Content="Bet on Both 12's Sets at the same Time"
-                             Command="{Binding Set_BetOn12section_Both_SetsCommand}"
-                             IsChecked="{Binding BetOn12sectionMode, 
-                                          Converter={StaticResource EnumToBoolConverter},
-                                          ConverterParameter={x:Static viewmodels:BetOn12section.BetOn_Both_Sets},
-                                          Mode=TwoWay}"
-                             d:IsChecked="True"/>
+                                        <RadioButton
+                                            d:IsChecked="True"
+                                            Command="{Binding Set_BetOn12section_Both_SetsCommand}"
+                                            Content="Bet on Both 12's Sets at the same Time"
+                                            IsChecked="{Binding BetOn12sectionMode, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static viewmodels:BetOn12section.BetOn_Both_Sets}, Mode=TwoWay}" />
 
-                                        <RadioButton Content="Bet on 1 of the 12's Sets at a Time"
-                             Command="{Binding Set_BetOn12section_1_Set_At_A_TimeCommand}"
-                             IsChecked="{Binding BetOn12sectionMode, 
-                                        Converter={StaticResource EnumToBoolConverter},
-                                        ConverterParameter={x:Static viewmodels:BetOn12section.BetOn_1_Set_At_A_Time},
-                                        Mode=TwoWay}"/>
+                                        <RadioButton
+                                            Command="{Binding Set_BetOn12section_1_Set_At_A_TimeCommand}"
+                                            Content="Bet on 1 of the 12's Sets at a Time"
+                                            IsChecked="{Binding BetOn12sectionMode, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static viewmodels:BetOn12section.BetOn_1_Set_At_A_Time}, Mode=TwoWay}" />
                                     </StackPanel>
                                 </Border>
                             </StackPanel>
                         </Border>
                         <!--#endregion-->
 
-                        <!--#region Random Bets -->
+                        <!--#region Random Bets-->
                         <Border Style="{StaticResource CardStyle}">
                             <StackPanel>
-                                <TextBlock Text="If 'Bet On' Option (1st 12,  2nd 12,  3rd 12,  top 2:1,  mid 2:1,  bottom 2:1) is selected:" Style="{StaticResource HeaderStyle}"/>
-                                <TextBlock Text="And If (Bet on 1 of the 12's Sets at a Time) is selected:" Style="{StaticResource HeaderStyle}"/>
+                                <TextBlock Style="{StaticResource HeaderStyle}" Text="If 'Bet On' Option (1st 12,  2nd 12,  3rd 12,  top 2:1,  mid 2:1,  bottom 2:1) is selected:" />
+                                <TextBlock Style="{StaticResource HeaderStyle}" Text="And If (Bet on 1 of the 12's Sets at a Time) is selected:" />
 
 
                                 <Border Margin="2" Padding="3">
                                     <StackPanel>
-                                        <RadioButton Content="Bet on the Same 2 Individual Bets Every Bet"
-                             Command="{Binding Set_RandomBet_12section_SameBets_EveryTimeCommand}"
-                             IsChecked="{Binding RandomBet_12SectionMode, 
-                                        Converter={StaticResource EnumToBoolConverter},
-                                        ConverterParameter={x:Static viewmodels:RandomBet_12section.BetOn_SameBets_EveryTime},
-                                        Mode=TwoWay}"
-                             d:IsChecked="True"/>
+                                        <RadioButton
+                                            d:IsChecked="True"
+                                            Command="{Binding Set_RandomBet_12section_SameBets_EveryTimeCommand}"
+                                            Content="Bet on the Same 2 Individual Bets Every Bet"
+                                            IsChecked="{Binding RandomBet_12SectionMode, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static viewmodels:RandomBet_12section.BetOn_SameBets_EveryTime}, Mode=TwoWay}" />
 
-                                        <RadioButton Content="Bet on Random 2 Bets Every Bet"
-                             Command="{Binding Set_RandomBet_12section_RandomBets_EveryTimeCommand}"
-                             IsChecked="{Binding RandomBet_12SectionMode, 
-                                        Converter={StaticResource EnumToBoolConverter},
-                                        ConverterParameter={x:Static viewmodels:RandomBet_12section.BetOn_RandomBets_EveryTime},
-                                        Mode=TwoWay}"/>
+                                        <RadioButton
+                                            Command="{Binding Set_RandomBet_12section_RandomBets_EveryTimeCommand}"
+                                            Content="Bet on Random 2 Bets Every Bet"
+                                            IsChecked="{Binding RandomBet_12SectionMode, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static viewmodels:RandomBet_12section.BetOn_RandomBets_EveryTime}, Mode=TwoWay}" />
 
-                                        <RadioButton Content="Bet on Random 2 Bets Every Time it Wins"
-                             Command="{Binding Set_RandomBet_12section_RandomBets_DuringWinsCommand}"
-                             IsChecked="{Binding RandomBet_12SectionMode, 
-                                        Converter={StaticResource EnumToBoolConverter},
-                                        ConverterParameter={x:Static viewmodels:RandomBet_12section.BetOn_RandomBets_DuringWins},
-                                        Mode=TwoWay}"/>
+                                        <RadioButton
+                                            Command="{Binding Set_RandomBet_12section_RandomBets_DuringWinsCommand}"
+                                            Content="Bet on Random 2 Bets Every Time it Wins"
+                                            IsChecked="{Binding RandomBet_12SectionMode, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static viewmodels:RandomBet_12section.BetOn_RandomBets_DuringWins}, Mode=TwoWay}" />
                                     </StackPanel>
                                 </Border>
                             </StackPanel>
                         </Border>
                         <!--#endregion-->
 
-                        <!--#region Calculate Chip Amount -->
+                        <!--#region Calculate Chip Amount-->
                         <Border Style="{StaticResource CardStyle}">
                             <StackPanel>
-                                <TextBlock Text="If 'Bet On' Option (1st 12,  2nd 12,  3rd 12,  top 2:1,  mid 2:1,  bottom 2:1) is selected:" Style="{StaticResource HeaderStyle}"/>
-                                <TextBlock Text="And If (Bet on Both 12's Sets at the same Time) is selected:" Style="{StaticResource HeaderStyle}"/>
+                                <TextBlock Style="{StaticResource HeaderStyle}" Text="If 'Bet On' Option (1st 12,  2nd 12,  3rd 12,  top 2:1,  mid 2:1,  bottom 2:1) is selected:" />
+                                <TextBlock Style="{StaticResource HeaderStyle}" Text="And If (Bet on Both 12's Sets at the same Time) is selected:" />
 
                                 <Border Margin="2" Padding="3">
                                     <StackPanel>
-                                        <RadioButton Content="Calculate per Chip amount by (highest balance - current balance) / 2" 
-                             Command="{Binding Set_ChipAmountCalc_Option_1Command}"
-                             IsChecked="{Binding ChipAmountCalcMode, 
-                                        Converter={StaticResource EnumToBoolConverter},
-                                        ConverterParameter={x:Static viewmodels:ChipAmountCalc.Option_1},
-                                        Mode=TwoWay}"
-                             d:IsChecked="True"/>
+                                        <RadioButton
+                                            d:IsChecked="True"
+                                            Command="{Binding Set_ChipAmountCalc_Option_1Command}"
+                                            Content="Calculate per Chip amount by (highest balance - current balance) / 2"
+                                            IsChecked="{Binding ChipAmountCalcMode, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static viewmodels:ChipAmountCalc.Option_1}, Mode=TwoWay}" />
 
-                                        <RadioButton Content="Calculate per Chip amount by ((highest balance - current balance) + 1 ) / 2"
-                             Command="{Binding Set_ChipAmountCalc_Option_2Command}"
-                             IsChecked="{Binding ChipAmountCalcMode, 
-                                        Converter={StaticResource EnumToBoolConverter},
-                                        ConverterParameter={x:Static viewmodels:ChipAmountCalc.Option_2},
-                                        Mode=TwoWay}"/>
+                                        <RadioButton
+                                            Command="{Binding Set_ChipAmountCalc_Option_2Command}"
+                                            Content="Calculate per Chip amount by ((highest balance - current balance) + 1 ) / 2"
+                                            IsChecked="{Binding ChipAmountCalcMode, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static viewmodels:ChipAmountCalc.Option_2}, Mode=TwoWay}" />
                                     </StackPanel>
                                 </Border>
                             </StackPanel>
@@ -673,36 +665,28 @@
                         <!--#region Calculate Chip Amount 2-->
                         <Border Style="{StaticResource CardStyle}">
                             <StackPanel>
-                                <TextBlock Text="If 'Bet On' Option (1st 12,  2nd 12,  3rd 12,  top 2:1,  mid 2:1,  bottom 2:1) is selected:" Style="{StaticResource HeaderStyle}"/>
-                                <TextBlock Text="And If (Bet on 1 of the 12's Sets at a Time) is selected:" Style="{StaticResource HeaderStyle}"/>
+                                <TextBlock Style="{StaticResource HeaderStyle}" Text="If 'Bet On' Option (1st 12,  2nd 12,  3rd 12,  top 2:1,  mid 2:1,  bottom 2:1) is selected:" />
+                                <TextBlock Style="{StaticResource HeaderStyle}" Text="And If (Bet on 1 of the 12's Sets at a Time) is selected:" />
 
                                 <Border Margin="2" Padding="3">
                                     <StackPanel>
-                                        <RadioButton Content="Double the Chip Amount after each loss. Reset when it wins."                           
-                                                     Command="{Binding Set_ChipAmountCalc_12section_SimpleDoubleCommand}"
-                                                     IsChecked="{Binding ChipAmountCalc_12sectionMode, 
-                                                                Converter={StaticResource EnumToBoolConverter},
-                                                                ConverterParameter={x:Static viewmodels:ChipAmountCalc_12section.SimpleDouble},
-                                                                Mode=TwoWay}"
-                                                     d:IsChecked="True"/>
-                                        <RadioButton Content="Double the Chip Amount after each loss and then add $1. Reset when it wins."
-                             Command="{Binding Set_ChipAmountCalc_12section_DoublePlusOneCommand}"
-                             IsChecked="{Binding ChipAmountCalc_12sectionMode, 
-                                        Converter={StaticResource EnumToBoolConverter},
-                                        ConverterParameter={x:Static viewmodels:ChipAmountCalc_12section.DoublePlusOne},
-                                        Mode=TwoWay}"/>
-                                        <RadioButton Content="Double the Chip Amount after each loss, then add an extra dollar per loss. Reset when it wins."
-                             Command="{Binding Set_ChipAmountCalc_12section_DoublePlusIncrementingDollarCommand}"
-                             IsChecked="{Binding ChipAmountCalc_12sectionMode, 
-                                        Converter={StaticResource EnumToBoolConverter},
-                                        ConverterParameter={x:Static viewmodels:ChipAmountCalc_12section.DoublePlusIncrementingDollar},
-                                        Mode=TwoWay}"/>
-                                        <RadioButton Content="Bet $1, double after first loss, then triple after each loss until it wins."
-                             Command="{Binding Set_ChipAmountCalc_12section_DoubleThenTripleCommand}"
-                             IsChecked="{Binding ChipAmountCalc_12sectionMode, 
-                                        Converter={StaticResource EnumToBoolConverter},
-                                        ConverterParameter={x:Static viewmodels:ChipAmountCalc_12section.DoubleThenTriple},
-                                        Mode=TwoWay}"/>
+                                        <RadioButton
+                                            d:IsChecked="True"
+                                            Command="{Binding Set_ChipAmountCalc_12section_SimpleDoubleCommand}"
+                                            Content="Double the Chip Amount after each loss. Reset when it wins."
+                                            IsChecked="{Binding ChipAmountCalc_12sectionMode, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static viewmodels:ChipAmountCalc_12section.SimpleDouble}, Mode=TwoWay}" />
+                                        <RadioButton
+                                            Command="{Binding Set_ChipAmountCalc_12section_DoublePlusOneCommand}"
+                                            Content="Double the Chip Amount after each loss and then add $1. Reset when it wins."
+                                            IsChecked="{Binding ChipAmountCalc_12sectionMode, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static viewmodels:ChipAmountCalc_12section.DoublePlusOne}, Mode=TwoWay}" />
+                                        <RadioButton
+                                            Command="{Binding Set_ChipAmountCalc_12section_DoublePlusIncrementingDollarCommand}"
+                                            Content="Double the Chip Amount after each loss, then add an extra dollar per loss. Reset when it wins."
+                                            IsChecked="{Binding ChipAmountCalc_12sectionMode, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static viewmodels:ChipAmountCalc_12section.DoublePlusIncrementingDollar}, Mode=TwoWay}" />
+                                        <RadioButton
+                                            Command="{Binding Set_ChipAmountCalc_12section_DoubleThenTripleCommand}"
+                                            Content="Bet $1, double after first loss, then triple after each loss until it wins."
+                                            IsChecked="{Binding ChipAmountCalc_12sectionMode, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static viewmodels:ChipAmountCalc_12section.DoubleThenTriple}, Mode=TwoWay}" />
                                     </StackPanel>
                                 </Border>
                             </StackPanel>
@@ -711,42 +695,35 @@
 
                     </StackPanel>
 
-                    
 
-                    <!-- #region Edit Yellow Boxes Positions -->
-                    <Border Style="{StaticResource CardStyle}"
-                            Visibility="{Binding ShowEditYellowBoxesPositionsSection,
-                                        Converter={StaticResource BooleanToVisibilityConverter}}">
+
+                    <!--#region Edit Yellow Boxes Positions-->
+                    <Border Style="{StaticResource CardStyle}" Visibility="{Binding ShowEditYellowBoxesPositionsSection, Converter={StaticResource BooleanToVisibilityConverter}}">
 
                         <StackPanel>
-                            <TextBlock Text="Edit Yellow Boxes Positions:" Style="{StaticResource HeaderStyle}"/>
+                            <TextBlock Style="{StaticResource HeaderStyle}" Text="Edit Yellow Boxes Positions:" />
 
                             <Border Margin="2" Padding="3">
                                 <StackPanel>
-                                    <RadioButton x:Name="EnableYellowBoxesRadioButton"
-                             Content="Enable"
-                             Command="{Binding EnableEditYellowBoxesCommand}"
-                             IsChecked="{Binding YellowBoxesConfigType, 
-                                          Converter={StaticResource EnumToBoolConverter},
-                                          ConverterParameter={x:Static viewmodels:ConfigYellowBoxes.Enabled},
-                                          Mode=TwoWay}"
-                             d:IsChecked="False"/>
+                                    <RadioButton
+                                        x:Name="EnableYellowBoxesRadioButton"
+                                        d:IsChecked="False"
+                                        Command="{Binding EnableEditYellowBoxesCommand}"
+                                        Content="Enable"
+                                        IsChecked="{Binding YellowBoxesConfigType, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static viewmodels:ConfigYellowBoxes.Enabled}, Mode=TwoWay}" />
 
 
-                                    <RadioButton Content="Disable"
-                             Command="{Binding DisableEditYellowBoxesCommand}"
-                             IsChecked="{Binding YellowBoxesConfigType, 
-                                         Converter={StaticResource EnumToBoolConverter},
-                                         ConverterParameter={x:Static viewmodels:ConfigYellowBoxes.Disabled},
-                                         Mode=TwoWay}"
-                             d:IsChecked="True">
-                                    </RadioButton>
+                                    <RadioButton
+                                        d:IsChecked="True"
+                                        Command="{Binding DisableEditYellowBoxesCommand}"
+                                        Content="Disable"
+                                        IsChecked="{Binding YellowBoxesConfigType, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static viewmodels:ConfigYellowBoxes.Disabled}, Mode=TwoWay}" />
 
                                 </StackPanel>
                             </Border>
                         </StackPanel>
                     </Border>
-                    <!-- #endregion -->
+                    <!--#endregion-->
 
                 </StackPanel>
 
