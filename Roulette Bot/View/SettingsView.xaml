@@ -15,6 +15,7 @@
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
 
+
         <Style TargetType="RadioButton">
             <Setter Property="Foreground" Value="{StaticResource SecondaryText}" />
             <Setter Property="FontSize" Value="14" />
@@ -531,7 +532,7 @@
                     <!--#region $ Bet Mark Amount To Reset To $1-->
                     <Border Style="{StaticResource CardStyle}">
                         <StackPanel>
-                            <TextBlock Style="{StaticResource HeaderStyle}" Text="$ Bet Mark Amount To Reset To $1:" />
+                            <TextBlock Style="{StaticResource HeaderStyle}" Text="$ Bet Chip Amount To Reset To $1:" />
 
                             <StackPanel Orientation="Horizontal">
 
@@ -587,21 +588,29 @@
                         <!--#region Bet On 12 Sets-->
                         <Border Style="{StaticResource CardStyle}">
                             <StackPanel>
-                                <TextBlock Style="{StaticResource HeaderStyle}" Text="If 'Bet On' Option (1st 12,  2nd 12,  3rd 12,  top 2:1,  mid 2:1,  bottom 2:1) is selected:" />
+                                <TextBlock Style="{StaticResource HeaderStyle}" Text="Choose Strategy:" />
 
 
                                 <Border Margin="2" Padding="3">
                                     <StackPanel>
                                         <RadioButton
+                                            x:Name="Simultaneous_Bets_Btn"
                                             d:IsChecked="True"
                                             Command="{Binding Set_BetOn12section_Both_SetsCommand}"
-                                            Content="Bet on Both 12's Sets at the same Time"
+                                            Content="Place 2 bets simultaneously on 2 of the three 12's and 2:1's locations."
                                             IsChecked="{Binding BetOn12sectionMode, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static viewmodels:BetOn12section.BetOn_Both_Sets}, Mode=TwoWay}" />
 
                                         <RadioButton
+                                            x:Name="Sequential_Bets_Btn"
+                                            d:IsChecked="False"
                                             Command="{Binding Set_BetOn12section_1_Set_At_A_TimeCommand}"
-                                            Content="Bet on 1 of the 12's Sets at a Time"
+                                            Content="Place 2 bets either on 2 of the three 12's or 2:1's locations at a time."
                                             IsChecked="{Binding BetOn12sectionMode, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static viewmodels:BetOn12section.BetOn_1_Set_At_A_Time}, Mode=TwoWay}" />
+
+                                        <RadioButton
+                                            Command="{Binding Set_BetOn12section_Both_Sets_1_Set_With_1_BetCommand}"
+                                            Content="Place 2 bets either on 2 of the three 12's or 2:1's locations, and a 3rd bet on 1 of the three 12's or 2:1's opposite locations."
+                                            IsChecked="{Binding BetOn12sectionMode, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static viewmodels:BetOn12section.BetOn_Both_Sets_1_Set_With_1_Bet}, Mode=TwoWay}" />
                                     </StackPanel>
                                 </Border>
                             </StackPanel>
@@ -609,28 +618,26 @@
                         <!--#endregion-->
 
                         <!--#region Random Bets-->
-                        <Border Style="{StaticResource CardStyle}">
+                        <Border Style="{StaticResource CardStyle}" Visibility="{Binding IsChecked, ElementName=Simultaneous_Bets_Btn, Converter={StaticResource BooleanToVisibilityInverseConverter}}">
                             <StackPanel>
-                                <TextBlock Style="{StaticResource HeaderStyle}" Text="If 'Bet On' Option (1st 12,  2nd 12,  3rd 12,  top 2:1,  mid 2:1,  bottom 2:1) is selected:" />
-                                <TextBlock Style="{StaticResource HeaderStyle}" Text="And If (Bet on 1 of the 12's Sets at a Time) is selected:" />
-
+                                <TextBlock Style="{StaticResource HeaderStyle}" Text="Choose Random Bet Placement Strategy:" />
 
                                 <Border Margin="2" Padding="3">
                                     <StackPanel>
                                         <RadioButton
                                             d:IsChecked="True"
                                             Command="{Binding Set_RandomBet_12section_SameBets_EveryTimeCommand}"
-                                            Content="Bet on the Same 2 Individual Bets Every Bet"
+                                            Content="Bet on the same betting locations every time."
                                             IsChecked="{Binding RandomBet_12SectionMode, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static viewmodels:RandomBet_12section.BetOn_SameBets_EveryTime}, Mode=TwoWay}" />
 
                                         <RadioButton
                                             Command="{Binding Set_RandomBet_12section_RandomBets_EveryTimeCommand}"
-                                            Content="Bet on Random 2 Bets Every Bet"
+                                            Content="Bet on random betting locations every time."
                                             IsChecked="{Binding RandomBet_12SectionMode, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static viewmodels:RandomBet_12section.BetOn_RandomBets_EveryTime}, Mode=TwoWay}" />
 
                                         <RadioButton
                                             Command="{Binding Set_RandomBet_12section_RandomBets_DuringWinsCommand}"
-                                            Content="Bet on Random 2 Bets Every Time it Wins"
+                                            Content="Bet on random betting locations every time it wins."
                                             IsChecked="{Binding RandomBet_12SectionMode, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static viewmodels:RandomBet_12section.BetOn_RandomBets_DuringWins}, Mode=TwoWay}" />
                                     </StackPanel>
                                 </Border>
@@ -639,10 +646,10 @@
                         <!--#endregion-->
 
                         <!--#region Calculate Chip Amount-->
-                        <Border Style="{StaticResource CardStyle}">
+                        <Border Style="{StaticResource CardStyle}" Visibility="{Binding IsChecked, ElementName=Simultaneous_Bets_Btn, Converter={StaticResource BooleanToVisibilityConverter}}">
                             <StackPanel>
-                                <TextBlock Style="{StaticResource HeaderStyle}" Text="If 'Bet On' Option (1st 12,  2nd 12,  3rd 12,  top 2:1,  mid 2:1,  bottom 2:1) is selected:" />
-                                <TextBlock Style="{StaticResource HeaderStyle}" Text="And If (Bet on Both 12's Sets at the same Time) is selected:" />
+                                <TextBlock Style="{StaticResource HeaderStyle}" Text="Choose Chip Amount Calculation Strategy:" />
+
 
                                 <Border Margin="2" Padding="3">
                                     <StackPanel>
@@ -663,10 +670,10 @@
                         <!--#endregion-->
 
                         <!--#region Calculate Chip Amount 2-->
-                        <Border Style="{StaticResource CardStyle}">
+                        <Border Style="{StaticResource CardStyle}" Visibility="{Binding IsChecked, ElementName=Sequential_Bets_Btn, Converter={StaticResource BooleanToVisibilityConverter}}">
                             <StackPanel>
-                                <TextBlock Style="{StaticResource HeaderStyle}" Text="If 'Bet On' Option (1st 12,  2nd 12,  3rd 12,  top 2:1,  mid 2:1,  bottom 2:1) is selected:" />
-                                <TextBlock Style="{StaticResource HeaderStyle}" Text="And If (Bet on 1 of the 12's Sets at a Time) is selected:" />
+                                <TextBlock Style="{StaticResource HeaderStyle}" Text="Choose Chip Amount Calculation Strategy:" />
+
 
                                 <Border Margin="2" Padding="3">
                                     <StackPanel>

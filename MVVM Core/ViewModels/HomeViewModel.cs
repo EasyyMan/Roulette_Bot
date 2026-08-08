@@ -79,12 +79,15 @@ public partial class HomeViewModel : ObservableObject
         BackEndCore.RandomBet_12section randomBet12sectionMode = (BackEndCore.RandomBet_12section)Enum.Parse(typeof(BackEndCore.RandomBet_12section), _settings.RandomBet_12SectionMode.ToString());
         BackEndCore.ChipAmountCalc_12section chipAmountCalc12sectionMode = (BackEndCore.ChipAmountCalc_12section)Enum.Parse(typeof(BackEndCore.ChipAmountCalc_12section), _settings.ChipAmountCalc_12sectionMode.ToString());
 
+        int resetMarkAmount = _settings.ResetMarkAmount;
+
         var config = new SettingsConfigured(isRealPlay, 
                                             email, 
                                             password,
                                             betRandomBetsEveryTime, 
                                             isBetOnOption_1, 
                                             isChipAmountCalc_Option_1,
+                                            resetMarkAmount,
                                             betOn12sectionMode,
                                             randomBet12sectionMode,
                                             chipAmountCalc12sectionMode,

@@ -3,7 +3,8 @@
 public enum BetOn12section
 {
     BetOn_Both_Sets,
-    BetOn_1_Set_At_A_Time
+    BetOn_1_Set_At_A_Time,
+    BetOn_Both_Sets_1_Set_With_1_Bet
 }
 
 
@@ -29,6 +30,7 @@ public class SettingsConfigured(bool isRealPlay,
                                 bool betRandomBetsEveryTime,
                                 bool isBetOnOption_1,
                                 bool isChipAmountCalc_Option_1,
+                                int resetMarkAmount,
 
                                 BetOn12section betOn12sectionMode,
                                 RandomBet_12section randomBet12sectionMode,
@@ -48,6 +50,8 @@ public class SettingsConfigured(bool isRealPlay,
     public bool IsBetOnOption_1 { get; } = isBetOnOption_1;
 
     public bool IsChipAmountCalc_Option_1 { get; } = isChipAmountCalc_Option_1;
+
+    public int ResetMarkAmount { get; } = resetMarkAmount;
 
     public BetOn12section BetOn_12sectionMode { get; } = betOn12sectionMode;
 

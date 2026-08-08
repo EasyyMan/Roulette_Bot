@@ -71,6 +71,8 @@ public class CasinoSite : ICasinoSiteService
     private List<int> _1st2nd3rd_12s_lastBetKeys = new List<int>();
     private List<int> _topToBottom_21_lastBetKeys = new List<int>();
 
+
+
     private readonly Dictionary<int, string> _fullScreenButtonXpath = new Dictionary<int, string>
     {
         [1] = "/html/body/div[2]/div/div/div[3]/div[2]/div[1]/button[1]",
@@ -193,6 +195,11 @@ public class CasinoSite : ICasinoSiteService
 
     #endregion
 
+    private void OnIntrusionDetected(object sender, ForegroundIntrusionEventArgs e)
+    {
+        LogInfo?.Invoke($"⚠ Foreign window took focus: {e.ProcessName} — \"{e.WindowTitle}\"");
+    }
+
     public async Task StartAsync(IUIOverlayService overlay, SettingsConfigured settings, bool skipEditingYellowBoxes, CancellationToken token)
     {        
         _settingsConfig = settings;
@@ -207,7 +214,7 @@ public class CasinoSite : ICasinoSiteService
 
         // after ChromeDriver is launched:
         _focusGuardian.Start();
-        _focusGuardian.IntrusionDetected += (_, e) => LogInfo?.Invoke($"⚠ Foreign window took focus: {e.ProcessName} — \"{e.WindowTitle}\"");
+        _focusGuardian.IntrusionDetected += OnIntrusionDetected!;        
 
 
         Login();                
@@ -371,7 +378,7 @@ public class CasinoSite : ICasinoSiteService
     public void Stop()
     {
         _focusGuardian.Stop();
-        _focusGuardian.IntrusionDetected -= (_, e) => LogInfo?.Invoke($"⚠ Foreign window took focus: {e.ProcessName} — \"{e.WindowTitle}\"");
+        _focusGuardian.IntrusionDetected -= OnIntrusionDetected!;        
 
         LogInfo?.Invoke($"Closing site...");
         _driver?.Quit();
@@ -719,9 +726,54 @@ public class CasinoSite : ICasinoSiteService
         {
             await BetOnBoth_12Sections(token);
         }
-        else
+        else if(_settingsConfig.BetOn_12sectionMode == BetOn12section.BetOn_1_Set_At_A_Time)
         {
             await BetOnOne_12Sections(token);
+        }
+        else
+        {
+            await BetOn_Both_Sets_1_Set_With_1_Bet_12Sections(token);
+        }
+    }
+
+    private async Task BetOn_Both_Sets_1_Set_With_1_Bet_12Sections(CancellationToken token)
+    {
+        double chipAmount = 1;
+
+        while (!token.IsCancellationRequested)
+        {
+            double balance = AccountBalance();
+
+            if (chipAmount > _settingsConfig!.ResetMarkAmount)
+            {
+                chipAmount = 1;                
+            }
+
+            SetRandomBetOn12SectionsAsync(chipAmount);
+
+            await PlaceBetForSectionAsync(chipAmount, token);
+
+            token.ThrowIfCancellationRequested();
+
+            // step 3 - click bet button
+            await _spin_Btn!.ClickButton(token);
+
+            token.ThrowIfCancellationRequested();
+
+            double balance_result = AccountBalance();
+
+            bool won = balance_result > balance; // wins 2 bets of the 3 betting locations.
+            bool lost = balance_result < balance; // losses all 3 bets of the 3 betting locations.
+
+            if (won)
+            {
+                chipAmount = 1;
+                if (ValidateStopOperatingAfter()) break;
+            }
+            else if (lost)
+            {
+                chipAmount *= 2;
+            }
         }
     }
 
@@ -730,7 +782,13 @@ public class CasinoSite : ICasinoSiteService
         double chipAmount = 1;
 
         while (!token.IsCancellationRequested)
-        {                        
+        {
+            if (chipAmount > _settingsConfig!.ResetMarkAmount)
+            {
+                chipAmount = 1;
+                _twelveSectionService.ResetLossCount();
+            }
+
             SetRandomBetOn12SectionsAsync(chipAmount);
 
             await PlaceBetForSectionAsync(chipAmount, token);
@@ -797,11 +855,20 @@ public class CasinoSite : ICasinoSiteService
     private async Task PlaceBetForSectionAsync(double chipAmount, CancellationToken token)
     {
         if (_twelveSectionService.GetNextSectionIndex() == 1)
+        {
             await PlaceDoubleBet(_1st2nd3rd_12s_lastBetKeys, chipAmount, token);
-        else
-            await PlaceDoubleBet(_topToBottom_21_lastBetKeys, chipAmount, token);
-    }
 
+            // opposite third bet for the 'BetOn_Both_Sets_1_Set_With_1_Bet' Strategy
+            await PlaceThirdBet(_topToBottom_21_lastBetKeys, chipAmount, token);
+        }            
+        else
+        {
+            await PlaceDoubleBet(_topToBottom_21_lastBetKeys, chipAmount, token);
+
+            // opposite third bet for the 'BetOn_Both_Sets_1_Set_With_1_Bet' Strategy
+            await PlaceThirdBet(_1st2nd3rd_12s_lastBetKeys, chipAmount, token);
+        }            
+    }
 
 
     private async Task BetOnBoth_12Sections(CancellationToken token)
@@ -814,6 +881,12 @@ public class CasinoSite : ICasinoSiteService
             token.ThrowIfCancellationRequested();
 
             double chipAmount = GetChipAmount();
+
+            if (chipAmount > _settingsConfig!.ResetMarkAmount)
+            {
+                _highestBalance = AccountBalance();
+                chipAmount = GetChipAmount();
+            }
 
             
             if (_1st2nd3rd_12s_lastBetKeys.Count == 0 && _topToBottom_21_lastBetKeys.Count == 0)
@@ -878,6 +951,19 @@ public class CasinoSite : ICasinoSiteService
             int selectedKey = num;
             await PlaceAutomatedBetAsync(chipAmount, selectedKey, token);            
         }
+    }
+
+    private async Task PlaceThirdBet(List<int> numbers, double chipAmount, CancellationToken token)
+    {
+        if (_settingsConfig!.BetOn_12sectionMode == BetOn12section.BetOn_Both_Sets_1_Set_With_1_Bet)
+        {
+            foreach (var num in numbers)
+            {
+                int selectedKey = num;
+                await PlaceAutomatedBetAsync(chipAmount, selectedKey, token);
+                break; // Only place the bet on the first number in the list
+            }
+        }        
     }
 
     private void Initialize_1st2nd3rd_12s_lastBetKeys()
@@ -949,6 +1035,11 @@ public class CasinoSite : ICasinoSiteService
 
         while (!token.IsCancellationRequested)
         {
+            if (stake > _settingsConfig!.ResetMarkAmount)
+            {
+                break;
+            }
+
             token.ThrowIfCancellationRequested();
 
             int selectedBetKey = GetBetKey();

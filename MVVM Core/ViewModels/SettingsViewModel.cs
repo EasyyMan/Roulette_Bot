@@ -48,7 +48,8 @@ public enum ChipAmountCalc
 public enum BetOn12section
 {
     BetOn_Both_Sets,
-    BetOn_1_Set_At_A_Time
+    BetOn_1_Set_At_A_Time,
+    BetOn_Both_Sets_1_Set_With_1_Bet
 }
 
 
@@ -66,8 +67,6 @@ public enum ChipAmountCalc_12section
     DoublePlusIncrementingDollar,
     DoubleThenTriple
 }
-
-
 
 
 public partial class SettingsViewModel : ObservableObject
@@ -205,6 +204,13 @@ public partial class SettingsViewModel : ObservableObject
     {
         BetOn12sectionMode = BetOn12section.BetOn_1_Set_At_A_Time;
     }
+
+    [RelayCommand]
+    public void Set_BetOn12section_Both_Sets_1_Set_With_1_Bet()
+    {
+        BetOn12sectionMode = BetOn12section.BetOn_Both_Sets_1_Set_With_1_Bet;
+    }
+    //BetOn_Both_Sets_1_Set_With_1_Bet
 
     #endregion
 
