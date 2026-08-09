@@ -212,8 +212,11 @@ public class CasinoSite : ICasinoSiteService
 
         await CloseCookieWindowAsync(token);
 
+        // Grab the exact native window handle for this specific browser
+        IntPtr seleniumHwnd = _driver!.GetNativeWindowHandle();
+
         // after ChromeDriver is launched:
-        _focusGuardian.Start();
+        _focusGuardian.Start(seleniumHwnd);
         _focusGuardian.IntrusionDetected += OnIntrusionDetected!;        
 
 

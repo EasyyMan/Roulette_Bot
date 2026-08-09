@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BackEndCore.Services.WindowFocus;
+﻿namespace BackEndCore.Services.WindowFocus;
 
 public interface IChromeFocusGuardianService : IDisposable
 {
-    void Start(IReadOnlyCollection<string>? extraAllowedProcessNames = null);
+    void Start(IntPtr seleniumHwnd, IReadOnlyCollection<string>? extraAllowedProcessNames = null);
     void Stop();
     bool IsClickTargetClear(int screenX, int screenY);
 
